@@ -30,8 +30,8 @@ const config = {
       initialProjectKey: 'composable-b2b-dev',
     },
     production: {
-      applicationId: 'TODO',
-      url: 'https://your_app_hostname.com',
+      applicationId: 'clnuibmyn0003w501l6bby0yh',
+      url: 'https://mc-translator.netlify.app/',
     },
   },
   additionalEnv: {
