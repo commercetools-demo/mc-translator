@@ -103,9 +103,9 @@ const Welcome = () => {
               isExternal
             />
             <InfoCard
-              title={intl.formatMessage(messages.cardChannelsTitle)}
-              content={intl.formatMessage(messages.cardChannelsContent)}
-              linkTo={`${match.url}/channels`}
+              title={intl.formatMessage(messages.cardProductsTitle)}
+              content={intl.formatMessage(messages.cardProductsContent)}
+              linkTo={`${match.url}/products`}
             />
           </Grid>
         </Spacings.Stack>

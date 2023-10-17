@@ -36,4 +36,13 @@ export default defineMessages({
     defaultMessage:
       'Demo example to fetch some data using GraphQL and displaying it in a paginated table.',
   },
+  cardProductsTitle: {
+    id: 'Welcome.cardProductsTitle',
+    defaultMessage: 'Translate products',
+  },
+  cardProductsContent: {
+    id: 'Welcome.cardProductsContent',
+    defaultMessage:
+      'Usee Google translate to translate product names and descriptions.',
+  },
 });
