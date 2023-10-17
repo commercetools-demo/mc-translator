@@ -29,7 +29,6 @@ import DataTable from '@commercetools-uikit/data-table';
 import { Pagination } from '@commercetools-uikit/pagination';
 import styles from './products.module.css';
 import { useEffect, useMemo, useState } from 'react';
-import Authenticate from '../authenticate';
 import { useProductUpdater } from '../../hooks/use-products-connector/use-products-connector';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 
@@ -135,89 +134,87 @@ const Products = (props: TProductsProps) => {
 
   // @ts-ignore
   return (
-    <Authenticate>
-      <Spacings.Stack scale="xl">
-        <Spacings.Stack scale="xs">
-          <FlatButton
-            as={RouterLink}
-            to={props.linkToWelcome}
-            label={intl.formatMessage(messages.backToWelcome)}
-            icon={<BackIcon />}
-          />
-          <Text.Headline as="h2" intlMessage={messages.title} />
-        </Spacings.Stack>
-        <div className={styles.languageSelectorContainer}>
-          <SelectField
-            title={intl.formatMessage(messages.sourceLang)}
-            options={languageOptions}
-            onChange={(e) => setSourceLang(e.target.value as string)}
-            value={sourceLang}
-          />
-          <SelectField
-            title={intl.formatMessage(messages.destLang)}
-            options={languageOptions}
-            onChange={(e) => setDestLang(e.target.value as string)}
-            value={destLang}
-          />
-        </div>
-        {loading && <LoadingSpinner />}
-
-        {productsPaginatedResult ? (
-          <Spacings.Stack scale="l">
-            <DataTable<
-              NonNullable<
-                TFetchProductsQuery['productProjectionSearch']['results']
-              >[0]
-            >
-              isCondensed
-              columns={columns}
-              rows={rowsWithSelection}
-              itemRenderer={(item, column) => {
-                switch (column.key) {
-                  case 'selected':
-                    return <CheckboxInput onChange={(e) => console.log(e)} />;
-                  case 'id':
-                    return item.id;
-                  case 'name':
-                    return item.name;
-                  case 'nameDestination':
-                    return item.dstName;
-                  default:
-                    return null;
-                }
-              }}
-              sortedBy={tableSorting.value.key}
-              sortDirection={tableSorting.value.order}
-              onSortChange={tableSorting.onChange}
-              onRowClick={(row) => push(`${match.url}/${row.id}`)}
-              footer={
-                <>
-                  {!isTranslated && (
-                    <SecondaryButton
-                      label="translate"
-                      iconLeft={isLoading ? <LoadingSpinner /> : undefined}
-                      onClick={() => onTranslateProducts(rowsWithSelection)}
-                    />
-                  )}
-                  {isTranslated && (
-                    <ContentNotification type="success">
-                      {intl.formatMessage(messages.translated)}
-                    </ContentNotification>
-                  )}
-                </>
-              }
-            />
-            <Pagination
-              page={page.value}
-              onPageChange={page.onChange}
-              perPage={perPage.value}
-              onPerPageChange={perPage.onChange}
-              totalItems={productsPaginatedResult.total}
-            />
-          </Spacings.Stack>
-        ) : null}
+    <Spacings.Stack scale="xl">
+      <Spacings.Stack scale="xs">
+        <FlatButton
+          as={RouterLink}
+          to={props.linkToWelcome}
+          label={intl.formatMessage(messages.backToWelcome)}
+          icon={<BackIcon />}
+        />
+        <Text.Headline as="h2" intlMessage={messages.title} />
       </Spacings.Stack>
-    </Authenticate>
+      <div className={styles.languageSelectorContainer}>
+        <SelectField
+          title={intl.formatMessage(messages.sourceLang)}
+          options={languageOptions}
+          onChange={(e) => setSourceLang(e.target.value as string)}
+          value={sourceLang}
+        />
+        <SelectField
+          title={intl.formatMessage(messages.destLang)}
+          options={languageOptions}
+          onChange={(e) => setDestLang(e.target.value as string)}
+          value={destLang}
+        />
+      </div>
+      {loading && <LoadingSpinner />}
+
+      {productsPaginatedResult ? (
+        <Spacings.Stack scale="l">
+          <DataTable<
+            NonNullable<
+              TFetchProductsQuery['productProjectionSearch']['results']
+            >[0]
+          >
+            isCondensed
+            columns={columns}
+            rows={rowsWithSelection}
+            itemRenderer={(item, column) => {
+              switch (column.key) {
+                case 'selected':
+                  return <CheckboxInput onChange={(e) => console.log(e)} />;
+                case 'id':
+                  return item.id;
+                case 'name':
+                  return item.name;
+                case 'nameDestination':
+                  return item.dstName;
+                default:
+                  return null;
+              }
+            }}
+            sortedBy={tableSorting.value.key}
+            sortDirection={tableSorting.value.order}
+            onSortChange={tableSorting.onChange}
+            onRowClick={(row) => push(`${match.url}/${row.id}`)}
+            footer={
+              <>
+                {!isTranslated && (
+                  <SecondaryButton
+                    label="translate"
+                    iconLeft={isLoading ? <LoadingSpinner /> : undefined}
+                    onClick={() => onTranslateProducts(rowsWithSelection)}
+                  />
+                )}
+                {isTranslated && (
+                  <ContentNotification type="success">
+                    {intl.formatMessage(messages.translated)}
+                  </ContentNotification>
+                )}
+              </>
+            }
+          />
+          <Pagination
+            page={page.value}
+            onPageChange={page.onChange}
+            perPage={perPage.value}
+            onPerPageChange={perPage.onChange}
+            totalItems={productsPaginatedResult.total}
+          />
+        </Spacings.Stack>
+      ) : null}
+    </Spacings.Stack>
   );
 };
 Products.displayName = 'Products';

@@ -84,24 +84,11 @@ const Welcome = () => {
         </div>
 
         <Spacings.Stack scale="l">
-          <Text.Subheadline as="h4" intlMessage={messages.subtitle} />
           <Grid
             gridGap="16px"
             gridAutoColumns="1fr"
             gridTemplateColumns="repeat(3, 1fr)"
           >
-            <InfoCard
-              title={intl.formatMessage(messages.cardDocumentationTitle)}
-              content={intl.formatMessage(messages.cardDocumentationContent)}
-              linkTo="https://docs.commercetools.com/custom-applications/what-is-a-custom-application"
-              isExternal
-            />
-            <InfoCard
-              title={intl.formatMessage(messages.cardDesignSystemTitle)}
-              content={intl.formatMessage(messages.cardDesignSystemContent)}
-              linkTo="https://uikit.commercetools.com"
-              isExternal
-            />
             <InfoCard
               title={intl.formatMessage(messages.cardProductsTitle)}
               content={intl.formatMessage(messages.cardProductsContent)}

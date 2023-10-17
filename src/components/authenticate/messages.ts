@@ -13,4 +13,8 @@ export default defineMessages({
     id: 'authenticate.button',
     defaultMessage: 'Authenticate',
   },
+  backToWelcome: {
+    id: 'Channels.backToWelcome',
+    defaultMessage: 'Back to Welcome page',
+  },
 });

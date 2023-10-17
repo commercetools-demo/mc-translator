@@ -1,15 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import PrimaryButton from '@commercetools-uikit/primary-button';
 import Text from '@commercetools-uikit/text';
+import Spacings from '@commercetools-uikit/spacings';
 import React, { useEffect, useState } from 'react';
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import messages from './messages';
 import { useIntl } from 'react-intl';
+import FlatButton from '@commercetools-uikit/flat-button';
+import { Link as RouterLink } from 'react-router-dom';
+import { BackIcon } from '@commercetools-uikit/icons';
 declare var gapi: any;
 
-const Authenticate: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+type TAuthenticateProps = {
+  linkToWelcome: string;
+};
+
+const Authenticate: React.FC<
+  { children: React.ReactNode } & TAuthenticateProps
+> = ({ children, linkToWelcome }) => {
   const intl = useIntl();
 
   // @ts-ignore
@@ -66,16 +74,26 @@ const Authenticate: React.FC<{ children: React.ReactNode }> = ({
     <>
       {!isLoggedIn && (
         <div>
-          <Text.Headline as="h1" intlMessage={messages.title} />
-          <Text.Subheadline as="h4" intlMessage={messages.subtitle} />
-
-          <PrimaryButton
-            label={intl.formatMessage(messages.button)}
-            onClick={authenticate}
-            type="button"
-            tone="primary"
-            style={{ color: 'black' }}
-          ></PrimaryButton>
+          <Spacings.Stack scale="xs">
+            <FlatButton
+              as={RouterLink}
+              to={linkToWelcome}
+              label={intl.formatMessage(messages.backToWelcome)}
+              icon={<BackIcon />}
+            />
+          </Spacings.Stack>
+          <Spacings.Stack scale="xs">
+            <Text.Headline as="h1" intlMessage={messages.title} />
+            <Text.Subheadline as="h4" intlMessage={messages.subtitle} />
+            <PrimaryButton
+              label={intl.formatMessage(messages.button)}
+              onClick={authenticate}
+              type="button"
+              tone="primary"
+              size="medium"
+              style={{ color: 'black', width: 'fit-content' }}
+            ></PrimaryButton>
+          </Spacings.Stack>
         </div>
       )}
       {isLoggedIn && children}
