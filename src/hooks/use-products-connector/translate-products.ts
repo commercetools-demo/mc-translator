@@ -69,7 +69,7 @@ export const useTranslateProducts = () => {
       const productUpdate: { id: string; version: number; actions: unknown[] } =
         {
           id: p.id,
-          version: p.version + 1,
+          version: p.version,
           actions: [],
         };
       fieldsToAction.forEach((f) => {
