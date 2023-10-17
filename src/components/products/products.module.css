@@ -1,0 +1,4 @@
+.languageSelectorContainer {
+  display: flex;
+  gap: var(--spacing-s);
+}
