@@ -26,4 +26,8 @@ export default defineMessages({
     id: 'Channels.noResults',
     defaultMessage: 'There are no channels available in this project.',
   },
+  translated: {
+    id: 'Translation.complete',
+    defaultMessage: 'Translation completed. Head to the Products page to review the changes.',
+  },
 });

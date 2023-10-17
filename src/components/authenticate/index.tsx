@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import PrimaryButton from '@commercetools-uikit/primary-button';
+import Text from '@commercetools-uikit/text';
 import React, { useEffect, useState } from 'react';
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
-
+import messages from './messages';
+import { useIntl } from 'react-intl';
 declare var gapi: any;
 
 const Authenticate: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const intl = useIntl();
+
   // @ts-ignore
   const { googleClientID, translateApiKey } = useApplicationContext(
     (context) => context.environment
@@ -61,12 +65,18 @@ const Authenticate: React.FC<{ children: React.ReactNode }> = ({
   return (
     <>
       {!isLoggedIn && (
-        <PrimaryButton
-          label="Authenticate with Google"
-          onClick={authenticate}
-          type="button"
-          className=""
-        ></PrimaryButton>
+        <div>
+          <Text.Headline as="h1" intlMessage={messages.title} />
+          <Text.Subheadline as="h4" intlMessage={messages.subtitle} />
+
+          <PrimaryButton
+            label={intl.formatMessage(messages.button)}
+            onClick={authenticate}
+            type="button"
+            tone="primary"
+            style={{ color: 'black' }}
+          ></PrimaryButton>
+        </div>
       )}
       {isLoggedIn && children}
     </>

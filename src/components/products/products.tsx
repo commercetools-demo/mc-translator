@@ -28,9 +28,10 @@ import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import DataTable from '@commercetools-uikit/data-table';
 import { Pagination } from '@commercetools-uikit/pagination';
 import styles from './products.module.css';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Authenticate from '../authenticate';
 import { useProductUpdater } from '../../hooks/use-products-connector/use-products-connector';
+import { ContentNotification } from '@commercetools-uikit/notifications';
 
 type TProductsProps = {
   linkToWelcome: string;
@@ -42,12 +43,14 @@ const Products = (props: TProductsProps) => {
   const match = useRouteMatch();
   const { translateProductsActions } = useTranslateProducts();
 
-  const { page, perPage } = usePaginationState();
+  const { page, perPage } = usePaginationState({ perPage: 50 });
   const tableSorting = useDataTableSortingState({ key: 'id', order: 'asc' });
 
   const [sourceLang, setSourceLang] = useState<string>();
   const [destLang, setDestLang] = useState<string>();
-  const { dataLocale, projectLanguages } = useApplicationContext((context) => ({
+  const [isLoading, setIsLoading] = useState(false);
+  const [isTranslated, setIsTranslated] = useState(false);
+  const { projectLanguages } = useApplicationContext((context) => ({
     dataLocale: context.dataLocale,
     projectLanguages: context.project?.languages,
   }));
@@ -69,13 +72,7 @@ const Products = (props: TProductsProps) => {
     deselectAllRows,
     getIsRowSelected,
     getNumberOfSelectedRows,
-  } = useRowSelection(
-    'checkbox',
-    productsPaginatedResult?.results?.map((item) => ({
-      ...item,
-      checkbox: false,
-    })) || []
-  );
+  } = useRowSelection('checkbox', productsPaginatedResult?.results || []);
   const countSelectedRows = getNumberOfSelectedRows();
   const isSelectColumnHeaderIndeterminate =
     countSelectedRows > 0 && countSelectedRows < rowsWithSelection.length;
@@ -111,6 +108,7 @@ const Products = (props: TProductsProps) => {
   );
 
   const onTranslateProducts = async (rows: any[]) => {
+    setIsLoading(true);
     const translatedProductsActions = await translateProductsActions(
       rows,
       destLang!,
@@ -123,7 +121,17 @@ const Products = (props: TProductsProps) => {
         actions: product.actions,
       });
     }
+    setIsLoading(false);
+    setIsTranslated(true);
   };
+
+  useEffect(() => {
+    if (isTranslated) {
+      setTimeout(() => {
+        setIsTranslated(false);
+      }, 10000);
+    }
+  }, [isTranslated]);
 
   // @ts-ignore
   return (
@@ -183,10 +191,20 @@ const Products = (props: TProductsProps) => {
               onSortChange={tableSorting.onChange}
               onRowClick={(row) => push(`${match.url}/${row.id}`)}
               footer={
-                <SecondaryButton
-                  label="translate"
-                  onClick={() => onTranslateProducts(rowsWithSelection)}
-                />
+                <>
+                  {!isTranslated && (
+                    <SecondaryButton
+                      label="translate"
+                      iconLeft={isLoading ? <LoadingSpinner /> : undefined}
+                      onClick={() => onTranslateProducts(rowsWithSelection)}
+                    />
+                  )}
+                  {isTranslated && (
+                    <ContentNotification type="success">
+                      {intl.formatMessage(messages.translated)}
+                    </ContentNotification>
+                  )}
+                </>
               }
             />
             <Pagination
