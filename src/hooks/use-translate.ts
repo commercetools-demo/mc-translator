@@ -1,6 +1,6 @@
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import { googleTranslate } from '../utils/translation';
-export const useTranstale = () => {
+export const useTranslate = () => {
   // @ts-ignore
   const { googleProjectID } = useApplicationContext(
     (context) => context.environment

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { cleanSlug } from '../../utils/slug';
-import { useTranstale } from '../use-translate';
+import { useTranslate } from '../use-translate';
 
 export const useTranslateProducts = () => {
-  const { translate } = useTranstale();
+  const { translate } = useTranslate();
 
   const translateProductsActions = async (
     products: any[],

@@ -43,6 +43,6 @@ export default defineMessages({
   cardProductsContent: {
     id: 'Welcome.cardProductsContent',
     defaultMessage:
-      'Usee Google translate to translate product names and descriptions.',
+      'Use Google translate to translate product names and descriptions.',
   },
 });
