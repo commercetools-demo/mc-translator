@@ -23,8 +23,8 @@ export default defineMessages({
       'This page demonstrates how you can develop a component following some of the Merchant Center UX Guidelines and development best practices. For instance, fetching data using GraphQL, displaying data in a paginated table, writing functional tests, etc.',
   },
   noResults: {
-    id: 'Channels.noResults',
-    defaultMessage: 'There are no channels available in this project.',
+    id: 'Products.noResults',
+    defaultMessage: 'Product list is empty',
   },
   translated: {
     id: 'Translation.complete',
