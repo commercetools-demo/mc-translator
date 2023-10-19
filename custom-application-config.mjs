@@ -27,11 +27,11 @@ const config = {
   },
   env: {
     development: {
-      initialProjectKey: 'composable-b2b-dev',
+      initialProjectKey: '${env:INITIAL_PROJECT_KEY}',
     },
     production: {
-      applicationId: 'clnuibmyn0003w501l6bby0yh',
-      url: 'https://mc-translator.netlify.app/',
+      applicationId: '${env:APPLICATION_ID}',
+      url: '${env:APPLICATION_URL}',
     },
   },
   additionalEnv: {
