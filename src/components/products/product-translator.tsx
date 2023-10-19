@@ -14,9 +14,14 @@ import messages from './messages';
 type Props = {
   products: TFetchProductsQuery['productProjectionSearch']['results'];
   destLang?: string;
+  sourceLang?: string;
 };
 
-const ProductTranslator: React.FC<Props> = ({ products, destLang }) => {
+const ProductTranslator: React.FC<Props> = ({
+  products,
+  destLang,
+  sourceLang,
+}) => {
   const intl = useIntl();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +33,8 @@ const ProductTranslator: React.FC<Props> = ({ products, destLang }) => {
     setIsLoading(true);
     const translatedProductsActions = await translateProductsActions(
       rows,
-      destLang!
+      destLang!,
+      sourceLang!
     );
 
     for await (const product of translatedProductsActions) {

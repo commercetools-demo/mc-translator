@@ -48,7 +48,11 @@ const ProductConfigurator: React.FC<Props> = ({
         onChange={(e) => onDestLangChange(e.target.value as string)}
         value={destLang}
       />
-      <ProductTranslator products={products} destLang={destLang} />
+      <ProductTranslator
+        products={products}
+        destLang={destLang}
+        sourceLang={sourceLang}
+      />
     </Spacings.Stack>
   );
 };

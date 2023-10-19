@@ -7,7 +7,8 @@ export const useTranslateProducts = () => {
 
   const translateProductsActions = async (
     products: any[],
-    destLang: string
+    destLang: string,
+    sourceLang: string
   ) => {
     const selectedProducts = products.filter((p) => p.checkbox);
     const translatableProducts = selectedProducts
@@ -22,7 +23,8 @@ export const useTranslateProducts = () => {
       .reduce((a, b) => a.concat(b), []);
     const translated: Record<'translatedText', string>[] = await translate(
       translatableProducts,
-      destLang
+      destLang,
+      sourceLang
     );
 
     const productUpdates: {

@@ -26,6 +26,8 @@ const config = {
   },
   additionalEnv: {
     translateApiKey: '${env:TRANSLATE_API_KEY}',
+    translationMemoryContainer: '${env:TRANSLATION_MEMORY_CONTAINER}',
+    translationMemoryObjectKey: '${env:TRANSLATION_MEMORY_OBJECT_KEY}',
   },
   oAuthScopes: {
     view: ['view_products'],
