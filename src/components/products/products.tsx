@@ -54,7 +54,7 @@ const Products = (props: TProductsProps) => {
     projectLanguages: context.project?.languages,
   }));
 
-  const { productsPaginatedResult, error, loading } = useProductsFetcher({
+  const { productsPaginatedResult, loading } = useProductsFetcher({
     page,
     perPage,
     tableSorting,

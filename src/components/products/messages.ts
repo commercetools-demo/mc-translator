@@ -28,6 +28,7 @@ export default defineMessages({
   },
   translated: {
     id: 'Translation.complete',
-    defaultMessage: 'Translation completed. Head to the Products page to review the changes.',
+    defaultMessage:
+      'Translation completed. Head to the Products page to review the changes.',
   },
 });

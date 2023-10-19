@@ -20,11 +20,13 @@ const AsyncApplicationRoutes = lazy(
 // in order to catch possible errors on rendering/mounting.
 setupGlobalErrorListener();
 
-
 const EntryPoint = () => (
   <>
     <Helmet>
-      <script src="https://apis.google.com/js/api.js" type='text/javascript'></script>
+      <script
+        src="https://apis.google.com/js/api.js"
+        type="text/javascript"
+      ></script>
     </Helmet>
     <ApplicationShell
       environment={window.app}

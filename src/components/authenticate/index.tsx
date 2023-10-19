@@ -33,7 +33,7 @@ const Authenticate: React.FC<
         function () {
           console.log('GAPI client loaded for API');
         },
-        function (err) {
+        function (err: any) {
           console.error('Error loading GAPI client for API', err);
         }
       )
@@ -53,7 +53,7 @@ const Authenticate: React.FC<
           console.log('Sign-in successful');
           loadClient();
         },
-        function (err) {
+        function (err: any) {
           console.error('Error signing in', err);
         }
       );
@@ -69,7 +69,7 @@ const Authenticate: React.FC<
     });
     // @ts-ignore
     console.log();
-  }, []);
+  }, [googleClientID]);
   return (
     <>
       {!isLoggedIn && (

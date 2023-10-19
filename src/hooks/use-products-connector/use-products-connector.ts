@@ -12,9 +12,7 @@ import type { Exact, InputMaybe, Scalars } from '../../types/generated/ctp';
 import FetchProductsQuery from './fetch-products.ctp.graphql';
 import UpdateProductMutation from './update-products.ctp.graphql';
 import { TDataTableSortingState } from '@commercetools-uikit/hooks';
-import {
-  extractErrorFromGraphQlResponse,
-} from '../../helpers';
+import { extractErrorFromGraphQlResponse } from '../../helpers';
 
 export type TFetchProductsQuery = {
   __typename?: 'Query';
