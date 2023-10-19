@@ -2,20 +2,18 @@ import { useApplicationContext } from '@commercetools-frontend/application-shell
 import { googleTranslate } from '../utils/translation';
 export const useTranslate = () => {
   // @ts-ignore
-  const { googleProjectID } = useApplicationContext(
+  const { translateApiKey } = useApplicationContext(
     (context) => context.environment
   );
 
   const translate = async (
     textToTranslate: string | string[],
-    targetLanguage: string,
-    sourceLanguage: string
+    targetLanguage: string
   ) => {
     return await googleTranslate(
       textToTranslate,
       targetLanguage,
-      sourceLanguage,
-      googleProjectID
+      translateApiKey
     );
   };
 

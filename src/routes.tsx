@@ -3,7 +3,6 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import Spacings from '@commercetools-uikit/spacings';
 import Products from './components/products';
 import Welcome from './components/welcome';
-import Authenticate from './components/authenticate';
 
 type ApplicationRoutesProps = {
   children?: ReactNode;
@@ -26,9 +25,7 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
     <Spacings.Inset scale="l">
       <Switch>
         <Route path={`${match.path}/products`}>
-          <Authenticate linkToWelcome={`${match.url}`}>
-            <Products linkToWelcome={match.url} />
-          </Authenticate>
+          <Products linkToWelcome={match.url} />
         </Route>
         <Route>
           <Welcome />

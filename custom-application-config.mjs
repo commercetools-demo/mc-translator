@@ -11,17 +11,7 @@ const config = {
   headers: {
     csp: {
       'connect-src': [
-        'https://api.stripe.com',
-        'https://translation.googleapis.com/v3/projects/ct-sales-207211:translateText',
-      ],
-      'script-src': [
-        'https://apis.google.com/js/api.js',
-        'https://apis.google.com',
-      ],
-      'frame-src': [
-        'https://accounts.google.com',
-        'https://content-translate.googleapis.com',
-        'https://content-translation.googleapis.com',
+        'https://translation.googleapis.com/language/translate/v2',
       ],
     },
   },
@@ -35,8 +25,6 @@ const config = {
     },
   },
   additionalEnv: {
-    googleProjectID: '${env:GOOGLE_PROJECT_ID}',
-    googleClientID: '${env:GOOGLE_CLIENT_ID}',
     translateApiKey: '${env:TRANSLATE_API_KEY}',
   },
   oAuthScopes: {

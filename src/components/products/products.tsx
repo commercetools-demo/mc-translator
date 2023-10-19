@@ -105,8 +105,7 @@ const Products = (props: TProductsProps) => {
     setIsLoading(true);
     const translatedProductsActions = await translateProductsActions(
       rows,
-      destLang!,
-      sourceLang!
+      destLang!
     );
 
     for await (const product of translatedProductsActions) {

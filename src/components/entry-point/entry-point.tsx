@@ -5,7 +5,6 @@ import {
 } from '@commercetools-frontend/application-shell';
 import type { ApplicationWindow } from '@commercetools-frontend/constants';
 import loadMessages from '../../load-messages';
-import { Helmet } from 'react-helmet';
 
 declare let window: ApplicationWindow;
 
@@ -21,20 +20,9 @@ const AsyncApplicationRoutes = lazy(
 setupGlobalErrorListener();
 
 const EntryPoint = () => (
-  <>
-    <Helmet>
-      <script
-        src="https://apis.google.com/js/api.js"
-        type="text/javascript"
-      ></script>
-    </Helmet>
-    <ApplicationShell
-      environment={window.app}
-      applicationMessages={loadMessages}
-    >
-      <AsyncApplicationRoutes />
-    </ApplicationShell>
-  </>
+  <ApplicationShell environment={window.app} applicationMessages={loadMessages}>
+    <AsyncApplicationRoutes />
+  </ApplicationShell>
 );
 EntryPoint.displayName = 'EntryPoint';
 

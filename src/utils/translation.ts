@@ -1,22 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-declare var gapi: any;
+import axios from 'axios';
+
+const API_URL = 'https://translation.googleapis.com/language/translate/v2';
 
 const googleTranslate = async (
   textToTranslate: string | string[],
   targetLanguage: string,
-  sourceLanguage: string,
-  projectID: string
+  translateApiKey: string
 ) => {
-  const response = await gapi.client.translate.projects.translateText({
-    parent: `projects/${projectID}`,
-    resource: {
-      targetLanguageCode: targetLanguage,
-      sourceLanguageCode: sourceLanguage,
-      contents: textToTranslate,
-    },
+  const response = await axios.post(`${API_URL}?key=${translateApiKey}`, {
+    q: textToTranslate,
+    target: targetLanguage,
   });
 
-  return response.result.translations;
+  return response.data.data.translations;
 };
 
 export { googleTranslate };
