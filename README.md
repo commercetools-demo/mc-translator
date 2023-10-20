@@ -14,3 +14,4 @@ Read the [Getting started](https://docs.commercetools.com/custom-applications/ge
 # Developing the Custom Application
 
 Learn more about [developing a Custom Application](https://docs.commercetools.com/custom-applications/development) and [how to use the CLI](https://docs.commercetools.com/custom-applications/api-reference/cli).
+test
