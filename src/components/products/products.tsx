@@ -36,6 +36,7 @@ const Products = (props: TProductsProps) => {
   const [sourceLang, setSourceLang] = useState(source);
   const [destLang, setDestLang] = useState(dest);
   const [selectedProducts, setSelectedProducts] = useState<any[]>([]);
+  const [staged, setStaged] = useState(false);
 
   const { productsPaginatedResult, loading } = useProductsFetcher({
     page,
@@ -43,6 +44,7 @@ const Products = (props: TProductsProps) => {
     tableSorting,
     srcLocale: sourceLang,
     dstLocale: destLang,
+    staged,
   });
 
   return (
@@ -63,8 +65,10 @@ const Products = (props: TProductsProps) => {
               products={selectedProducts}
               sourceLang={sourceLang}
               destLang={destLang}
+              staged={staged}
               onDestLangChange={setDestLang}
               onSourceLangChange={setSourceLang}
+              onStagedChange={setStaged}
             />
           </div>
         </Grid.Item>

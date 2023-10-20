@@ -14,8 +14,8 @@ fragment VariantF on ProductSearchVariant {
   }
 }
 
-query FetchProducts($limit: Int!, $offset: Int!, $sorts: [String!], $srcLocale: Locale!, $dstLocale: Locale!) {
-  productProjectionSearch(limit: $limit, offset: $offset, sorts: $sorts) {
+query FetchProducts($limit: Int!, $offset: Int!, $sorts: [String!], $srcLocale: Locale!, $dstLocale: Locale!, $staged: Boolean) {
+  productProjectionSearch(limit: $limit, offset: $offset, sorts: $sorts, staged: $staged) {
     offset
     count
     total

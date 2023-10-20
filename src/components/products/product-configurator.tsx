@@ -17,8 +17,10 @@ import Styles from './products.module.css';
 type Props = {
   sourceLang?: string;
   destLang?: string;
+  staged?: boolean;
   onSourceLangChange: (sourceLang: string) => void;
   onDestLangChange: (destLang: string) => void;
+  onStagedChange: (value: boolean) => void;
   products: TFetchProductsQuery['productProjectionSearch']['results'];
 };
 
@@ -26,6 +28,8 @@ const ProductConfigurator: React.FC<Props> = ({
   products,
   sourceLang,
   destLang,
+  staged,
+  onStagedChange,
   onDestLangChange,
   onSourceLangChange,
 }) => {
@@ -62,7 +66,7 @@ const ProductConfigurator: React.FC<Props> = ({
   );
 
   return (
-    <Spacings.Stack scale="s" alignItems={'stretch'}>
+    <Spacings.Stack scale="m" alignItems={'stretch'}>
       <SelectField
         title={intl.formatMessage(messages.sourceLang)}
         options={languageOptions}
@@ -97,7 +101,12 @@ const ProductConfigurator: React.FC<Props> = ({
           ))}
         </div>
       </div>
-
+      <CheckboxInput
+        onChange={(e) => onStagedChange(e.target.checked)}
+        isChecked={staged}
+      >
+        {intl.formatMessage(messages.staged)}
+      </CheckboxInput>
       <ProductTranslator
         products={products}
         selectedFieldsToTranslate={selectedFields.map(

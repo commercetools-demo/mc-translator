@@ -13,6 +13,7 @@ import FetchProductsQuery from './fetch-products.ctp.graphql';
 import UpdateProductMutation from './update-products.ctp.graphql';
 import { TDataTableSortingState } from '@commercetools-uikit/hooks';
 import { extractErrorFromGraphQlResponse } from '../../helpers';
+import { useEffect } from 'react';
 
 export type TFetchProductsQuery = {
   __typename?: 'Query';
@@ -57,6 +58,7 @@ type TUseProductsFetcher = (
   paginationAndSortingProps: PaginationAndSortingProps & {
     srcLocale?: string;
     dstLocale?: string;
+    staged?: boolean;
   }
 ) => {
   productsPaginatedResult?: TFetchProductsQuery['productProjectionSearch'];
@@ -70,16 +72,18 @@ export type TFetchProductsQueryVariables = Exact<{
   sorts?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
   srcLocale?: Scalars['String'];
   dstLocale?: Scalars['String'];
+  staged?: boolean;
 }>;
 
 export const useProductsFetcher: TUseProductsFetcher = ({
   srcLocale,
   dstLocale,
+  staged,
   page,
   perPage,
   tableSorting,
 }) => {
-  const { data, error, loading } = useMcQuery<
+  const { data, error, loading, refetch } = useMcQuery<
     TFetchProductsQuery,
     TFetchProductsQueryVariables
   >(FetchProductsQuery, {
@@ -89,11 +93,16 @@ export const useProductsFetcher: TUseProductsFetcher = ({
       sorts: [`${tableSorting.value.key} ${tableSorting.value.order}`],
       srcLocale,
       dstLocale,
+      staged,
     },
     context: {
       target: GRAPHQL_TARGETS.COMMERCETOOLS_PLATFORM,
     },
   });
+
+  useEffect(() => {
+    refetch();
+  }, [staged]);
 
   return {
     productsPaginatedResult: data?.productProjectionSearch,

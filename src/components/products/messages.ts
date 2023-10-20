@@ -39,4 +39,8 @@ export default defineMessages({
     id: 'config.selectAll',
     defaultMessage: 'Select All',
   },
+  staged: {
+    id: 'config.staged',
+    defaultMessage: 'Use staged products',
+  },
 });
