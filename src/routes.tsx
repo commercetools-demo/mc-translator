@@ -24,7 +24,7 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
   return (
     <Spacings.Inset scale="l">
       <Switch>
-        <Route path={`${match.path}/products`}>
+        <Route path={`${match.path}/products/:source?/:dest?`}>
           <Products linkToWelcome={match.url} />
         </Route>
         <Route>

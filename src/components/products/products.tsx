@@ -1,5 +1,5 @@
 import { useIntl } from 'react-intl';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
 import CheckboxInput from '@commercetools-uikit/checkbox-input';
 import Spacings from '@commercetools-uikit/spacings';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
@@ -28,14 +28,18 @@ type TProductsProps = {
 
 const Products = (props: TProductsProps) => {
   const intl = useIntl();
+  const { source, dest } = useParams<{
+    source: string | undefined;
+    dest: string | undefined;
+  }>();
   const { push } = useHistory();
   const match = useRouteMatch();
 
   const { page, perPage } = usePaginationState({ perPage: 50 });
   const tableSorting = useDataTableSortingState({ key: 'id', order: 'asc' });
 
-  const [sourceLang, setSourceLang] = useState<string>();
-  const [destLang, setDestLang] = useState<string>();
+  const [sourceLang, setSourceLang] = useState(source);
+  const [destLang, setDestLang] = useState(dest);
 
   const { productsPaginatedResult, loading } = useProductsFetcher({
     page,
@@ -89,6 +93,7 @@ const Products = (props: TProductsProps) => {
       previousPathLabel={intl.formatMessage(messages.backToWelcome)}
     >
       <Grid
+        display={'grid'}
         gridGap="16px"
         gridAutoColumns="1fr"
         gridTemplateColumns="repeat(6, 1fr)"
@@ -109,7 +114,7 @@ const Products = (props: TProductsProps) => {
             {loading && <LoadingSpinner scale={'s'} />}
 
             {productsPaginatedResult ? (
-              <Spacings.Stack scale="s" alignItems="center">
+              <Spacings.Stack scale="s" alignItems="stretch">
                 <DataTable<
                   NonNullable<
                     TFetchProductsQuery['productProjectionSearch']['results']
