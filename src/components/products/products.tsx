@@ -36,7 +36,7 @@ const Products = (props: TProductsProps) => {
   const [sourceLang, setSourceLang] = useState(source);
   const [destLang, setDestLang] = useState(dest);
   const [selectedProducts, setSelectedProducts] = useState<any[]>([]);
-  const [staged, setStaged] = useState(false);
+  const [staged, setStaged] = useState(true);
 
   const { productsPaginatedResult, loading } = useProductsFetcher({
     page,
