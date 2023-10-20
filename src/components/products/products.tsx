@@ -1,9 +1,7 @@
 import { useIntl } from 'react-intl';
-import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
-import CheckboxInput from '@commercetools-uikit/checkbox-input';
+import { useHistory, useParams } from 'react-router-dom';
 import Spacings from '@commercetools-uikit/spacings';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
-import DataTable, { TColumn, TRow } from '@commercetools-uikit/data-table';
 import { Pagination } from '@commercetools-uikit/pagination';
 import { useState } from 'react';
 import { InfoDetailPage } from '@commercetools-frontend/application-components';
@@ -12,15 +10,12 @@ import { ContentNotification } from '@commercetools-uikit/notifications';
 import {
   useDataTableSortingState,
   usePaginationState,
-  useRowSelection,
 } from '@commercetools-uikit/hooks';
 import messages from './messages';
-import {
-  TFetchProductsQuery,
-  useProductsFetcher,
-} from '../../hooks/use-products-connector';
+import { useProductsFetcher } from '../../hooks/use-products-connector';
 import ProductConfigurator from './product-configurator';
 import Styles from './products.module.css';
+import ProductTable from './product-table';
 
 type TProductsProps = {
   linkToWelcome: string;
@@ -33,7 +28,6 @@ const Products = (props: TProductsProps) => {
     dest: string | undefined;
   }>();
   const { push } = useHistory();
-  const match = useRouteMatch();
 
   const { page, perPage } = usePaginationState({ perPage: 50 });
   const tableSorting = useDataTableSortingState({ key: 'id', order: 'asc' });
@@ -48,43 +42,6 @@ const Products = (props: TProductsProps) => {
     srcLocale: sourceLang,
     dstLocale: destLang,
   });
-
-  const {
-    rows: rowsWithSelection,
-    toggleRow,
-    selectAllRows,
-    deselectAllRows,
-    getIsRowSelected,
-    getNumberOfSelectedRows,
-  } = useRowSelection('checkbox', productsPaginatedResult?.results || []);
-  const countSelectedRows = getNumberOfSelectedRows();
-  const isSelectColumnHeaderIndeterminate =
-    countSelectedRows > 0 && countSelectedRows < rowsWithSelection.length;
-  const handleSelectColumnHeaderChange =
-    countSelectedRows === 0 ? selectAllRows : deselectAllRows;
-  const columns: Array<TColumn> = [
-    {
-      key: 'checkbox',
-      label: (
-        <CheckboxInput
-          isIndeterminate={isSelectColumnHeaderIndeterminate}
-          isChecked={countSelectedRows !== 0}
-          onChange={handleSelectColumnHeaderChange}
-        />
-      ),
-      align: 'center',
-      renderItem: (row: TRow) => (
-        <CheckboxInput
-          isChecked={getIsRowSelected(row.id)}
-          onChange={() => toggleRow(row.id)}
-        />
-      ),
-      disableResizing: true,
-    },
-    { key: 'name', label: 'Product name - source' },
-    { key: 'nameDestination', label: 'Product name - destination' },
-    { key: 'id', label: 'ID' },
-  ];
 
   return (
     <InfoDetailPage
@@ -101,7 +58,7 @@ const Products = (props: TProductsProps) => {
         <Grid.Item gridColumnStart="1" gridColumn="1">
           <div className={Styles.configuratorContainer}>
             <ProductConfigurator
-              products={rowsWithSelection}
+              products={productsPaginatedResult?.results || []}
               sourceLang={sourceLang}
               destLang={destLang}
               onDestLangChange={setDestLang}
@@ -115,35 +72,9 @@ const Products = (props: TProductsProps) => {
 
             {productsPaginatedResult ? (
               <Spacings.Stack scale="s" alignItems="stretch">
-                <DataTable<
-                  NonNullable<
-                    TFetchProductsQuery['productProjectionSearch']['results']
-                  >[0]
-                >
-                  isCondensed
-                  columns={columns}
-                  rows={rowsWithSelection}
-                  itemRenderer={(item, column) => {
-                    switch (column.key) {
-                      case 'selected':
-                        return (
-                          <CheckboxInput onChange={(e) => console.log(e)} />
-                        );
-                      case 'id':
-                        return item.id;
-                      case 'name':
-                        return item.name;
-                      case 'nameDestination':
-                        return item.dstName;
-                      default:
-                        return null;
-                    }
-                  }}
-                  sortedBy={tableSorting.value.key}
-                  sortDirection={tableSorting.value.order}
-                  onSortChange={tableSorting.onChange}
-                  onRowClick={(row) => push(`${match.url}/${row.id}`)}
-                  footer={<></>}
+                <ProductTable
+                  items={productsPaginatedResult.results}
+                  tableSorting={tableSorting}
                 />
                 <Pagination
                   page={page.value}
