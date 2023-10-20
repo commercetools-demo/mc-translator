@@ -10,15 +10,18 @@ import {
 } from '../../hooks/use-products-connector/use-products-connector';
 import { useTranslateProducts } from '../../hooks/use-products-connector';
 import messages from './messages';
+import { TFieldAction } from '../../hooks/use-products-connector/translate-products';
 
 type Props = {
   products: TFetchProductsQuery['productProjectionSearch']['results'];
+  selectedFieldsToTranslate: TFieldAction[];
   destLang?: string;
   sourceLang?: string;
 };
 
 const ProductTranslator: React.FC<Props> = ({
   products,
+  selectedFieldsToTranslate,
   destLang,
   sourceLang,
 }) => {
@@ -33,6 +36,7 @@ const ProductTranslator: React.FC<Props> = ({
     setIsLoading(true);
     const translatedProductsActions = await translateProductsActions(
       rows,
+      selectedFieldsToTranslate,
       destLang!,
       sourceLang!
     );
@@ -59,6 +63,7 @@ const ProductTranslator: React.FC<Props> = ({
       {!isTranslated && (
         <SecondaryButton
           label="translate"
+          disabled={isLoading || !products.length}
           iconLeft={isLoading ? <LoadingSpinner scale={'s'} /> : undefined}
           onClick={() => onTranslateProducts(products)}
         />

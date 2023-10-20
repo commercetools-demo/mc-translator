@@ -2,7 +2,7 @@ import DataTableManager, {
   UPDATE_ACTIONS,
 } from '@commercetools-uikit/data-table-manager';
 import DataTable, { TColumn } from '@commercetools-uikit/data-table';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import CheckboxInput from '@commercetools-uikit/checkbox-input';
 import { TRowItem, useRowSelection } from '@commercetools-uikit/hooks';
 import { FormattedMessage } from 'react-intl';
@@ -29,8 +29,13 @@ const initialColumnsState = [...initialVisibleColumns, ...initialHiddenColumns];
 type ProductTableProps = {
   items: Array<TRowItem>;
   tableSorting: TDataTableSortingState;
+  onSelectedRowsChange: (rows: Array<TRowItem>) => void;
 };
-const ProductTable: FC<ProductTableProps> = ({ items, tableSorting }) => {
+const ProductTable: FC<ProductTableProps> = ({
+  items,
+  tableSorting,
+  onSelectedRowsChange,
+}) => {
   const { push } = useHistory();
   const match = useRouteMatch();
   const [tableData, setTableData] = useState({
@@ -134,6 +139,10 @@ const ProductTable: FC<ProductTableProps> = ({ items, tableSorting }) => {
     visibleColumnKeys: tableData.visibleColumnKeys,
     hideableColumns: tableData.columns,
   };
+
+  useEffect(() => {
+    onSelectedRowsChange(rowsWithSelection);
+  }, [countSelectedRows]);
   return (
     <DataTableManager
       columns={columnsWithSelect}

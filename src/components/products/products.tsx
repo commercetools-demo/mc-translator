@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useIntl } from 'react-intl';
 import { useHistory, useParams } from 'react-router-dom';
 import Spacings from '@commercetools-uikit/spacings';
@@ -34,6 +35,7 @@ const Products = (props: TProductsProps) => {
 
   const [sourceLang, setSourceLang] = useState(source);
   const [destLang, setDestLang] = useState(dest);
+  const [selectedProducts, setSelectedProducts] = useState<any[]>([]);
 
   const { productsPaginatedResult, loading } = useProductsFetcher({
     page,
@@ -58,7 +60,7 @@ const Products = (props: TProductsProps) => {
         <Grid.Item gridColumnStart="1" gridColumn="1">
           <div className={Styles.configuratorContainer}>
             <ProductConfigurator
-              products={productsPaginatedResult?.results || []}
+              products={selectedProducts}
               sourceLang={sourceLang}
               destLang={destLang}
               onDestLangChange={setDestLang}
@@ -75,6 +77,7 @@ const Products = (props: TProductsProps) => {
                 <ProductTable
                   items={productsPaginatedResult.results}
                   tableSorting={tableSorting}
+                  onSelectedRowsChange={setSelectedProducts}
                 />
                 <Pagination
                   page={page.value}

@@ -31,4 +31,12 @@ export default defineMessages({
     defaultMessage:
       'Translation completed. Head to the Products page to review the changes.',
   },
+  fields: {
+    id: 'config.fields',
+    defaultMessage: 'Fields to translate',
+  },
+  selectAll: {
+    id: 'config.selectAll',
+    defaultMessage: 'Select All',
+  },
 });
