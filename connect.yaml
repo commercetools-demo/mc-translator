@@ -18,9 +18,6 @@ deployAs:
           description: custom app entry point
           required: true
           default: 'translator'
-        - key: APPLICATION_ID
-          description: custom app production app ID
-          required: true
         - key: APPLICATION_URL
           description: custom app production app URL
           required: true
