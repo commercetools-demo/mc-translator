@@ -35,7 +35,7 @@ const config = {
   },
   icon: '${path:@commercetools-frontend/assets/application-icons/gift.svg}',
   mainMenuLink: {
-    defaultLabel: 'The insider',
+    defaultLabel: 'The translator',
     labelAllLocales: [],
     permissions: [PERMISSIONS.View],
   },
