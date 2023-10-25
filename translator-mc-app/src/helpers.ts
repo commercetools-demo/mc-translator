@@ -3,7 +3,6 @@ import {
   transformLocalizedFieldToLocalizedString,
 } from '@commercetools-frontend/l10n';
 import { isApolloError, ApolloError, type ServerError } from '@apollo/client';
-import type { TChannel } from './types/generated/ctp';
 import type {
   TGraphqlUpdateAction,
   TSyncAction,
@@ -65,8 +64,3 @@ export const createGraphQlUpdateActions = (actions: TSyncAction[]) =>
     ],
     []
   );
-
-export const convertToActionData = (draft: Partial<TChannel>) => ({
-  ...draft,
-  name: transformLocalizedFieldToLocalizedString(draft.nameAllLocales || []),
-});

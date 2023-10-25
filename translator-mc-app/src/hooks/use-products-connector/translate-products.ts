@@ -61,7 +61,11 @@ export const useTranslateProducts = () => {
   ) => {
     const selectedProducts = products.filter((p) => p.checkbox);
     const translatableProducts = selectedProducts
-      .map((p) => fieldsToTranslate.map((f) => p[f.fieldName]))
+      .map((p) =>
+        fieldsToTranslate
+          .filter((f) => p[f.fieldName])
+          .map((f) => p[f.fieldName])
+      )
       .reduce((a, b) => a.concat(b), []);
     const translated: Record<'translatedText', string>[] = await translate(
       translatableProducts,

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference path="../../../@types/commercetools__sync-actions/index.d.ts" />
-/// <reference path="../../../@types-extensions/graphql-ctp/index.d.ts" />
 
 import type { ApolloError } from '@apollo/client';
 import {
@@ -33,11 +32,11 @@ export type TFetchProductsQuery = {
   };
 };
 
-export type TUpdateProductMutationVariables = Exact<{
-  productId: Scalars['String'];
-  version: Scalars['Long'];
+export type TUpdateProductMutationVariables = {
+  productId: string;
+  version: number;
   actions: Array<any>;
-}>;
+};
 
 export type TUpdateProductMutation = {
   __typename?: 'Mutation';
@@ -66,14 +65,14 @@ type TUseProductsFetcher = (
   loading: boolean;
 };
 
-export type TFetchProductsQueryVariables = Exact<{
-  limit: Scalars['Int'];
-  offset: Scalars['Int'];
-  sorts?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
-  srcLocale?: Scalars['String'];
-  dstLocale?: Scalars['String'];
+export type TFetchProductsQueryVariables = {
+  limit: number;
+  offset: number;
+  sorts?: Array<string> | string;
+  srcLocale?: string;
+  dstLocale?: string;
   staged?: boolean;
-}>;
+};
 
 export const useProductsFetcher: TUseProductsFetcher = ({
   srcLocale,

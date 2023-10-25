@@ -1,7 +1,0 @@
-query TranslationMemory($container: String!, $key: String!) {
-  customObject(container: $container, key: $key) {
-    version
-    value
-  }
-}
-
