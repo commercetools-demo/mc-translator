@@ -8,7 +8,6 @@ import Spacings from '@commercetools-uikit/spacings';
 import Text from '@commercetools-uikit/text';
 import messages from './messages';
 import styles from './welcome.module.css';
-import WebDeveloperSvg from './web-developer.svg';
 
 type TWrapWithProps = {
   children: ReactNode;
@@ -72,16 +71,6 @@ const Welcome = () => {
     <Constraints.Horizontal max={16}>
       <Spacings.Stack scale="xl">
         <Text.Headline as="h1" intlMessage={messages.title} />
-        <div>
-          <div className={styles.imageContainer}>
-            <img
-              alt="web developer"
-              src={WebDeveloperSvg}
-              width="100%"
-              height="100%"
-            />
-          </div>
-        </div>
 
         <Spacings.Stack scale="l">
           <Grid
