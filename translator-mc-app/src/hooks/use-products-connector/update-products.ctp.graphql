@@ -1,0 +1,17 @@
+mutation UpdateProductLocalizedStrings(
+  $productId: String!
+  $version: Long!
+  $actions: [ProductUpdateAction!]!
+) {
+  updateProduct(id: $productId, version: $version, actions: $actions) {
+    id
+    masterData {
+      staged {
+        nameAllLocales {
+            locale
+            value
+        }
+      }
+    }
+  }
+}

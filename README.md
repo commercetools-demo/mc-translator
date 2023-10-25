@@ -1,16 +1,22 @@
 <p align="center">
   <a href="https://commercetools.com/">
     <img alt="commercetools logo" src="https://unpkg.com/@commercetools-frontend/assets/logos/commercetools_primary-logo_horizontal_RGB.png">
-  </a>
-  <b>Custom Application starter template in TypeScript</b>
+  </a></br>
+  <b>Connect Application Starter in TypeScript</b>
 </p>
 
-This is the [TypeScript](https://www.typescriptlang.org/) version of the starter template to [develop Custom Applications](https://docs.commercetools.com/custom-applications/) for the Merchant Center.
+This is the `starter-typescript` template to develop [connect applications](https://marketplace.commercetools.com/) in TypeScript.
 
-# Installing the template
+## Instructions
 
-Read the [Getting started](https://docs.commercetools.com/custom-applications/getting-started) documentation for more information.
+Use `create-connect-app` cli with `starter-typescript` as `template` value to download this template repository to build the integration application , folder structure needs to be followed to ensure certification & deployment from commercetools connect team as stated [here](https://github.com/commercetools/connect-application-kit#readme) 
 
-# Developing the Custom Application
+## Architecture principles for building an connect application 
 
-Learn more about [developing a Custom Application](https://docs.commercetools.com/custom-applications/development) and [how to use the CLI](https://docs.commercetools.com/custom-applications/api-reference/cli).
+* Connector solution should be lightweight in nature
+* Connector solutions should follow test driven development. Unit , Integration (& E2E) tests should be included and successfully passed to be used
+* No hardcoding of customer related config. If needed, values in an environment file which should not be maintained in repository
+* Connector solution should be supported with detailed documentation
+* Connectors should be point to point in nature, currently doesnt support any persistence capabilities apart from in memory persistence
+* Connector solution should use open source technologies, although connector itself can be private for specific customer(s)
+* Code should not contain console.log statements, use [the included logger](https://github.com/commercetools/merchant-center-application-kit/tree/main/packages-backend/loggers#readme) instead.
