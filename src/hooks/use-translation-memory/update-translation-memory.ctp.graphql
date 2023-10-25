@@ -1,6 +1,0 @@
-mutation UpdateTranslationMemory($container: String!, $key: String!, $value: String!) {
-  createOrUpdateCustomObject(draft:{ key: $key, container: $container, value: $value }) {
-    version
-    value
-  }
-}
