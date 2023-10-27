@@ -33,7 +33,6 @@ deployAs:
           default: 'memory'
         - key: ENABLE_NEW_JSX_TRANSFORM
           description: Enable new JSX transform
-          required: true
           default: true
       securedConfiguration:
         - key: CTP_CLIENT_ID
