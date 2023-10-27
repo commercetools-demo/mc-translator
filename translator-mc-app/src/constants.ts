@@ -7,9 +7,7 @@ declare const window: Window &
   };
 
 export const entryPointUriPath =
-  typeof window === 'undefined'
-    ? 'translator'
-    : window.app.entryPointUriPath;
+  typeof window === 'undefined' ? 'translator' : window.app.entryPointUriPath;
 
 export const PERMISSIONS = entryPointUriPathToPermissionKeys(
   entryPointUriPath!
