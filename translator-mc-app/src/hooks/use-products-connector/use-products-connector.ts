@@ -7,6 +7,7 @@ import {
   useMcQuery,
 } from '@commercetools-frontend/application-shell';
 import { GRAPHQL_TARGETS } from '@commercetools-frontend/constants';
+import type { Exact, InputMaybe, Scalars } from '../../types/generated/ctp';
 import FetchProductsQuery from './fetch-products.ctp.graphql';
 import UpdateProductMutation from './update-products.ctp.graphql';
 import { TDataTableSortingState } from '@commercetools-uikit/hooks';

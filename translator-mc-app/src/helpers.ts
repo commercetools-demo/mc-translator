@@ -64,4 +64,3 @@ export const createGraphQlUpdateActions = (actions: TSyncAction[]) =>
     ],
     []
   );
-

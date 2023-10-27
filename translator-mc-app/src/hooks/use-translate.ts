@@ -25,7 +25,6 @@ export const useTranslate = () => {
     const toTranslateTexts = memoryHitResult
       .filter((item) => !item.hit && item.text)
       .map((item) => item.text);
-
     if (toTranslateTexts.length) {
       translated = await googleTranslate(
         toTranslateTexts,
