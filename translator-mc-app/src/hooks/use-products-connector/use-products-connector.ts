@@ -48,7 +48,7 @@ export type TUpdateProductMutation = {
   } | null;
 };
 
-type PaginationAndSortingProps = {
+export type PaginationAndSortingProps = {
   page: { value: number };
   perPage: { value: number };
   tableSorting: TDataTableSortingState;

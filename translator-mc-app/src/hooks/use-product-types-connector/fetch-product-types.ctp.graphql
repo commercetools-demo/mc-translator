@@ -1,0 +1,17 @@
+query FetchProductTypes {
+  productTypes {
+    results {
+      key
+      name
+      attributeDefinitions {
+        results {
+          type {
+            name
+          }
+          attributeConstraint
+          name
+        }
+      }
+    }
+  }
+}
