@@ -32,8 +32,9 @@ deployAs:
           required: true
           default: 'memory'
         - key: ENABLE_NEW_JSX_TRANSFORM
-          description: Enable new JSX transform
-          default: true
+          description: enable new jsx transform
+          required: true
+          default: 'true'
       securedConfiguration:
         - key: CTP_CLIENT_ID
           description: client_id of an API Client for the commercetools Composable Commerce Project
