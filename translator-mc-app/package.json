@@ -5,10 +5,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "rimraf ./build && mc-scripts build",
+    "build": "rimraf ./public && mc-scripts build",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write '**/*.{js,ts}'",
-    "start": "mc-scripts start",
+    "start": "yarn compile-html && mc-scripts serve",
     "start:dev": "mc-scripts start",
     "compile-html": "mc-scripts compile-html",
     "compile-html:local": "MC_APP_ENV=development mc-scripts compile-html --transformer @commercetools-frontend/mc-dev-authentication/transformer-local.js",
