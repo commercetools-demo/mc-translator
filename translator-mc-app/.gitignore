@@ -1,7 +1,6 @@
 node_modules
 public
 dist
-.env
 .env.local
 # Common IDEs and editors
 **/.idea
