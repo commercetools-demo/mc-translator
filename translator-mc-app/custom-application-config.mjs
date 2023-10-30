@@ -1,4 +1,4 @@
-import { PERMISSIONS, entryPointUriPath } from './src/constants';
+import { PERMISSIONS } from './src/constants';
 
 /**
  * @type {import('@commercetools-frontend/application-config').ConfigOptionsForCustomApplication}
@@ -6,7 +6,7 @@ import { PERMISSIONS, entryPointUriPath } from './src/constants';
 const config = {
   name: 'The Insider',
   description: 'Translate your products the right way',
-  entryPointUriPath,
+  entryPointUriPath: 'translator',
   cloudIdentifier: '${env:CLOUD_IDENTIFIER}',
   headers: {
     csp: {
