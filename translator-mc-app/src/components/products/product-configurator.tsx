@@ -13,6 +13,7 @@ import {
 } from '../../hooks/use-products-connector/translate-products';
 import CheckboxInput from '@commercetools-uikit/checkbox-input';
 import Styles from './products.module.css';
+import { useProductTypesList } from '../../hooks/use-product-types-connector';
 
 type Props = {
   sourceLang?: string;
@@ -41,6 +42,9 @@ const ProductConfigurator: React.FC<Props> = ({
     dataLocale: context.dataLocale,
     projectLanguages: context.project?.languages,
   }));
+
+  const {translatableProductAttributes} = useProductTypesList();
+
 
   const handleFieldChange = (isChecked: boolean, fieldName: string) => {
     if (isChecked) {
