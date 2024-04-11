@@ -7,12 +7,43 @@ import {
   useMcQuery,
 } from '@commercetools-frontend/application-shell';
 import { GRAPHQL_TARGETS } from '@commercetools-frontend/constants';
-import type { Exact, InputMaybe, Scalars } from '../../types/generated/ctp';
 import FetchProductsQuery from './fetch-products.ctp.graphql';
 import UpdateProductMutation from './update-products.ctp.graphql';
 import { TDataTableSortingState } from '@commercetools-uikit/hooks';
 import { extractErrorFromGraphQlResponse } from '../../helpers';
 import { useEffect } from 'react';
+import { Product } from '@commercetools/platform-sdk';
+
+type TProductNode = {
+  [P in keyof Product]: string;
+}
+
+export interface Variant {
+  __typename?: 'ProductVariant';
+  id: string;
+  sku: string;
+  key: string;
+  attributesRaw: Array<{
+    name: string;
+    value: string | Record<string, string>;
+  }>
+}
+
+export interface TFetchProductItem {
+  __typename?: 'Product';
+  version: number;
+  id: string;
+  key: string;
+  name: string;
+  dstName: string;
+  description: string;
+  slug: string;
+  metaTitle: string;
+  metaKeywords: string;
+  metaDescription: string;
+  masterVariant: Variant;
+  variants: Array<Variant>;
+}
 
 export type TFetchProductsQuery = {
   __typename?: 'Query';
@@ -21,14 +52,7 @@ export type TFetchProductsQuery = {
     total: number;
     count: number;
     offset: number;
-    results: Array<{
-      __typename?: 'Product';
-      version: number;
-      id: string;
-      key: string;
-      name: string;
-      dstName: string;
-    }>;
+    results: Array<TFetchProductItem>;
   };
 };
 
@@ -98,6 +122,10 @@ export const useProductsFetcher: TUseProductsFetcher = ({
       target: GRAPHQL_TARGETS.COMMERCETOOLS_PLATFORM,
     },
   });
+
+  console.log(data?.productProjectionSearch?.results?.[0]?.masterVariant?.sku);
+  console.log(data?.productProjectionSearch?.results?.[3]?.masterVariant?.sku);
+  
 
   useEffect(() => {
     refetch();

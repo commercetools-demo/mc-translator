@@ -1,0 +1,6 @@
+.fieldsWrapper {
+  border: 1px solid var(--border-color-for-input);
+  padding: 0 5px;;
+  overflow-y: scroll;
+  max-height: 200px;
+}

@@ -14,9 +14,10 @@ import {
 } from '@commercetools-uikit/hooks';
 import messages from './messages';
 import { useProductsFetcher } from '../../hooks/use-products-connector';
-import ProductConfigurator from './product-configurator';
+import ProductConfigurator from '../product-configurator';
 import Styles from './products.module.css';
 import ProductTable from './product-table';
+import { TFetchProductItem } from '../../hooks/use-products-connector/use-products-connector';
 
 type TProductsProps = {
   linkToWelcome: string;
@@ -35,7 +36,9 @@ const Products = (props: TProductsProps) => {
 
   const [sourceLang, setSourceLang] = useState(source);
   const [destLang, setDestLang] = useState(dest);
-  const [selectedProducts, setSelectedProducts] = useState<any[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<
+    (TFetchProductItem & { [key: string]: boolean })[]
+  >([]);
   const [staged, setStaged] = useState(true);
 
   const { productsPaginatedResult, loading } = useProductsFetcher({

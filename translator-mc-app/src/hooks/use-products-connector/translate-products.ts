@@ -1,10 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { cleanSlug } from '../../utils/slug';
 import { useTranslate } from '../use-translate';
+import { TFetchProductItem } from './use-products-connector';
 
 export interface TFieldAction {
   label: string;
-  fieldName: string;
+  fieldName:
+    | 'name'
+    | 'description'
+    | 'slug'
+    | 'metaTitle'
+    | 'metaKeywords'
+    | 'metaDescription';
   actionName: string;
   allFields: string;
   transform?: (text: string) => string;
@@ -54,7 +61,7 @@ export const useTranslateProducts = () => {
   const { translate } = useTranslate();
 
   const translateProductsActions = async (
-    products: any[],
+    products: Array<TFetchProductItem & {[key: string]: boolean}>,
     fieldsToTranslate: TFieldAction[],
     destLang: string,
     sourceLang: string

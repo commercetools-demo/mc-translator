@@ -4,39 +4,44 @@
 import type { ApolloError } from '@apollo/client';
 import { useMcQuery } from '@commercetools-frontend/application-shell';
 import { GRAPHQL_TARGETS } from '@commercetools-frontend/constants';
-import type { Exact, InputMaybe, Scalars } from '../../types/generated/ctp';
+import type { Exact } from '../../types/generated/ctp';
 import FetchProductTypesQuery from './fetch-product-types.ctp.graphql';
-import { PaginationAndSortingProps } from '../use-products-connector/use-products-connector';
+
+export interface TAttributeDefinition {
+  __typename?: 'AttributeDefinition';
+  name: string;
+  label?: string;
+  type: {
+    name: string;
+  };
+}
+
+export interface TProductTypeResultItem {
+  __typename?: 'ProductTypeDefinition';
+  version: number;
+  id: string;
+  key: string;
+  name: string;
+  attributeDefinitions: {
+    results: Array<TAttributeDefinition>;
+  };
+}
+
+interface TProductTypesQuery {
+  __typename?: 'ProductTypeDefinitionQueryResult';
+  total: number;
+  count: number;
+  offset: number;
+  results: Array<TProductTypeResultItem>;
+}
 
 export type TFetchProductTypesQuery = {
   __typename?: 'Query';
-  productTypes: {
-    __typename?: 'ProductTypeDefinitionQueryResult';
-    total: number;
-    count: number;
-    offset: number;
-    results: Array<{
-      __typename?: 'ProductTypeDefinition';
-      version: number;
-      id: string;
-      key: string;
-      name: string;
-      attributeDefinitions: {
-        results: Array<{
-          __typename?: 'AttributeDefinition';
-          name: string;
-          label?: string;
-          type: {
-            name: string;
-          };
-        }>;
-      };
-    }>;
-  };
+  productTypes: TProductTypesQuery;
 };
 
 type TUseProductTypesFetcher = () => {
-  productTypesPaginatedResult?: TFetchProductTypesQuery['productTypes'];
+  productTypesPaginatedResult?: TProductTypesQuery;
   error?: ApolloError;
   loading: boolean;
 };

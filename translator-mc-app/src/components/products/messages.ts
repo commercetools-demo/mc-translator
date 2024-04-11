@@ -35,6 +35,10 @@ export default defineMessages({
     id: 'config.fields',
     defaultMessage: 'Fields to translate',
   },
+  attributes: {
+    id: 'config.attributes',
+    defaultMessage: 'Attributes to translate',
+  },
   selectAll: {
     id: 'config.selectAll',
     defaultMessage: 'Select All',

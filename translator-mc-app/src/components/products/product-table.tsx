@@ -9,6 +9,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { TDataTableSortingState } from '@commercetools-uikit/hooks/dist/declarations/src/use-data-table-sorting-state/use-data-table-sorting-state';
+import { TFetchProductItem } from '../../hooks/use-products-connector/use-products-connector';
 
 const initialVisibleColumns: Array<TColumn> = [
   { key: 'name', label: 'Product name - source' },
@@ -27,9 +28,9 @@ const initialHiddenColumns: Array<TColumn> = [
 const initialColumnsState = [...initialVisibleColumns, ...initialHiddenColumns];
 
 type ProductTableProps = {
-  items: Array<TRowItem>;
+  items: Array<TFetchProductItem>;
   tableSorting: TDataTableSortingState;
-  onSelectedRowsChange: (rows: Array<TRowItem>) => void;
+  onSelectedRowsChange: (rows: Array<TFetchProductItem & { [key: string]: boolean }>) => void;
 };
 const ProductTable: FC<ProductTableProps> = ({
   items,
@@ -52,7 +53,7 @@ const ProductTable: FC<ProductTableProps> = ({
     deselectAllRows,
     getIsRowSelected,
     getNumberOfSelectedRows,
-  } = useRowSelection('checkbox', items);
+  } = useRowSelection<TFetchProductItem>('checkbox', items);
 
   const countSelectedRows = getNumberOfSelectedRows();
   const isSelectColumnHeaderIndeterminate =

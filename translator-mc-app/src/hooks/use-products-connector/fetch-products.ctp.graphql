@@ -1,50 +1,96 @@
-fragment VariantF on ProductSearchVariant {
-  id
-  sku
-  prices {
-    id
-    value {
-      centAmount
-      currencyCode
-    }
-    country
-    channelRef {
-      id
-    }
-  }
-}
-
-query FetchProducts($limit: Int!, $offset: Int!, $sorts: [String!], $srcLocale: Locale!, $dstLocale: Locale!, $staged: Boolean) {
-  productProjectionSearch(limit: $limit, offset: $offset, sorts: $sorts, staged: $staged) {
+query FetchProducts(
+  $limit: Int!
+  $offset: Int!
+  $sorts: [String!]
+  $srcLocale: Locale!
+  $dstLocale: Locale!
+  $staged: Boolean
+) {
+  productProjectionSearch(
+    limit: $limit
+    offset: $offset
+    sorts: $sorts
+    staged: $staged
+  ) {
     offset
     count
     total
     results {
       id
       version
-      name (locale: $srcLocale)
-      description (locale: $srcLocale)
-      slug (locale: $srcLocale)
-      metaTitle (locale: $srcLocale)
-      metaKeywords (locale: $srcLocale)
-      metaDescription (locale: $srcLocale)
-      dstName: name (locale: $dstLocale)
-      dstDescription: description (locale: $dstLocale)
-      dstSlug: slug (locale: $dstLocale)
-      dstMetaTitle: metaTitle (locale: $dstLocale)
-      dstMetaKeywords: metaKeywords (locale: $dstLocale)
-      dstMetaDescription: metaDescription (locale: $dstLocale)
-      nameAllLocales { locale, value }
-      descriptionAllLocales { locale, value }
-      slugAllLocales { locale, value }
-      metaTitleAllLocales { locale, value }
-      metaKeywordsAllLocales { locale, value }
-      metaDescriptionAllLocales { locale, value }
+      name(locale: $srcLocale)
+      description(locale: $srcLocale)
+      slug(locale: $srcLocale)
+      metaTitle(locale: $srcLocale)
+      metaKeywords(locale: $srcLocale)
+      metaDescription(locale: $srcLocale)
+      dstName: name(locale: $dstLocale)
+      dstDescription: description(locale: $dstLocale)
+      dstSlug: slug(locale: $dstLocale)
+      dstMetaTitle: metaTitle(locale: $dstLocale)
+      dstMetaKeywords: metaKeywords(locale: $dstLocale)
+      dstMetaDescription: metaDescription(locale: $dstLocale)
+      nameAllLocales {
+        locale
+        value
+      }
+      descriptionAllLocales {
+        locale
+        value
+      }
+      slugAllLocales {
+        locale
+        value
+      }
+      metaTitleAllLocales {
+        locale
+        value
+      }
+      metaKeywordsAllLocales {
+        locale
+        value
+      }
+      metaDescriptionAllLocales {
+        locale
+        value
+      }
       masterVariant {
-        ...VariantF
+        id
+        sku
+        attributesRaw {
+          name
+          value
+        }
+        prices {
+          id
+          value {
+            centAmount
+            currencyCode
+          }
+          country
+          channelRef {
+            id
+          }
+        }
       }
       variants {
-        ...VariantF
+        id
+        sku
+        attributesRaw {
+          name
+          value
+        }
+        prices {
+          id
+          value {
+            centAmount
+            currencyCode
+          }
+          country
+          channelRef {
+            id
+          }
+        }
       }
     }
   }
