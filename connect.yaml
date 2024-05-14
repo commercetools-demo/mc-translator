@@ -1,5 +1,6 @@
 deployAs:
   - name: translator-mc-app
+    applicationType: merchant-center-custom-application
     configuration:
       standardConfiguration:
         - key: CTP_PROJECT_KEY
