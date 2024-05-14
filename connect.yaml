@@ -7,10 +7,13 @@ deployAs:
           description: Project key of the commercetools Composable Commerce Project
           required: true
           default: 'default-key'
+        - key: ENTRY_POINT_URI_PATH
+          description: The Application entry point URI path
+          default: 'translator'
         - key: CTP_REGION
           description: Region where the commercetools Composable Commerce Project is hosted
           required: true
-        - key: APPLICATION_ID
+        - key: CUSTOM_APPLICATION_ID
           description: The Custom Application ID
           required: true
         - key: CLOUD_IDENTIFIER
