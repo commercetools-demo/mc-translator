@@ -6,7 +6,7 @@ import { PERMISSIONS } from './src/constants';
 const config = {
   name: 'The Insider',
   description: 'Translate your products the right way',
-  entryPointUriPath: 'translator',
+  entryPointUriPath: '${env:ENTRY_POINT_URI_PATH}',
   cloudIdentifier: '${env:CLOUD_IDENTIFIER}',
   headers: {
     csp: {
@@ -20,7 +20,7 @@ const config = {
       initialProjectKey: '${env:INITIAL_PROJECT_KEY}',
     },
     production: {
-      applicationId: '${env:APPLICATION_ID}',
+      applicationId: '${env:CUSTOM_APPLICATION_ID}',
       url: '${env:APPLICATION_URL}',
     },
   },
