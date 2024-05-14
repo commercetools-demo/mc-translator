@@ -1,7 +1,5 @@
 deployAs:
   - name: translator-mc-app
-    applicationType: mc-app
-    endpoint: /
     configuration:
       standardConfiguration:
         - key: CTP_PROJECT_KEY
